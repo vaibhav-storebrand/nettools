@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+LABEL maintainer="Vaibhav Walke <vaibhav.walke181@gmail.com>"
+
 # Install essential troubleshooting tools
 RUN apk add --no-cache \
     bash \

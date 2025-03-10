@@ -1,5 +1,4 @@
 
-```markdown
 # nettools: Kubernetes Networking Debugging Tool
 
 [![Docker Build Status](https://img.shields.io/docker/cloud/automated/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)  

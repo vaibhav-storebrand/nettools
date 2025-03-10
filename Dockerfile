@@ -22,8 +22,8 @@ RUN apk add --no-cache \
     httpie \
     kubectl
 
-# Set working directory
-WORKDIR /root
+
 
 # Keep container running for debugging
-CMD ["sh", "-c", "while true; do sleep 3600; done"]
+CMD ["sleep", "3600"]
+

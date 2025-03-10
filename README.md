@@ -37,7 +37,7 @@ spec:
 
 
 
-Always running pod template example:
+Restart the pod:
 ````
 apiVersion: v1
 kind: Pod
@@ -51,6 +51,27 @@ spec:
     command:
       - sleep
       - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+
+````
+
+
+
+Infinite running pod template example:
+````
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nettools
+  namespace: default
+spec:
+  containers:
+  - name: nettools
+    image: vaibhavw/nettools:latest
+    command:
+      - sleep
+      - "infinity"
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
 

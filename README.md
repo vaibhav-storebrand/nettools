@@ -1,24 +1,44 @@
-[![Docker build](https://img.shields.io/docker/cloud/automated/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)
-[![Docker status](https://img.shields.io/docker/cloud/build/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)
-[![Docker pulls](https://img.shields.io/docker/pulls/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)
 
-# nettools
-Container image with network tools for troubleshooting Kubernetes clusters
+```markdown
+# nettools: Kubernetes Networking Debugging Tool
 
-To check some networking issues in a cluster:
+[![Docker Build Status](https://img.shields.io/docker/cloud/automated/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)  
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)  
+[![Docker Pulls](https://img.shields.io/docker/pulls/vaibhavw/nettools?logo=Docker)](https://hub.docker.com/r/vaibhavw/nettools)
 
-`kubectl run -it --image=vaibhavw/nettools nettools --restart=Never --namespace=default`
+`nettools` is a container image packed with essential network troubleshooting tools, ideal for diagnosing and resolving network issues within Kubernetes clusters.
 
-Or you can keep the following yaml file handy and run it in a pod
+## Getting Started
 
-`kubectl apply -f nettools.yaml`
+### Running in Kubernetes
 
-and login to the container
+To run the `nettools` container interactively in your cluster, execute the following command:
 
-`kubectl exec -it nettools bash --namespace=default`
+```bash
+kubectl run nettools --image=vaibhavw/nettools --namespace=default --restart=Never -it
+```
 
-Pod template example:
-````
+Alternatively, you can apply the pod definition directly from a YAML file:
+
+```bash
+kubectl apply -f nettools.yaml
+```
+
+Then, log into the container:
+
+```bash
+kubectl exec -it nettools --namespace=default -- bash
+```
+
+### Pod Definitions
+
+You can create a pod using one of the following templates.
+
+#### Simple Pod (1 Hour Duration)
+
+This example creates a pod that will run for one hour:
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -33,12 +53,13 @@ spec:
       - "3600"
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
-````
+```
 
+#### Pod with Auto-Restart on Failure
 
+If you want the pod to restart automatically, use this configuration:
 
-Restart the pod:
-````
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -53,13 +74,13 @@ spec:
       - "3600"
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
+```
 
-````
+#### Infinite Running Pod
 
+For continuous, indefinite execution:
 
-
-Infinite running pod template example:
-````
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -74,9 +95,12 @@ spec:
       - "infinity"
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
+```
 
-````
+### Running on Docker
 
-If you just want to use the network tools on a docker host:
+If you want to use the tools on a standalone Docker host, simply run:
 
-`docker run -it vaibhavw/nettools`
+```bash
+docker run -it vaibhavw/nettools
+```

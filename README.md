@@ -14,7 +14,7 @@
 To run the `nettools` container interactively in your cluster, execute the following command:
 
 ```bash
-kubectl run nettools --image=vaibhavw/nettools --namespace=default --restart=Never -it
+kubectl run nettools --image=vaibhavw/nettools --namespace=default --restart=Never --command -- sleep 3600 && kubectl wait --for=condition=ready pod/nettools --namespace=default && kubectl exec -it nettools --namespace=default -- /bin/bash
 ```
 
 Alternatively, you can apply the pod definition directly from a YAML file:
